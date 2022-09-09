@@ -9,13 +9,13 @@ function App(): JSX.Element {
             <header className="App-header">
                 Michael King UD CISC275 with React Hooks and TypeScript
             </header>
+            <p>
+                Edit <code>src/App.tsx</code> and save. This page will
+                automatically reload.
+            </p>
             <Container>
                 <Row>
                     <Col>
-                        <p>
-                            Edit <code>src/App.tsx</code> and save. This page
-                            will automatically reload.
-                        </p>
                         <img
                             src="C:\Users\micking\tasks\public\IMG_1715.jpg"
                             alt="A picture of abandoned food my friend took"
