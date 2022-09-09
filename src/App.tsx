@@ -9,27 +9,21 @@ function App(): JSX.Element {
             <header className="App-header">
                 Michael King UD CISC275 with React Hooks and TypeScript
             </header>
+            <h1>Another Header</h1>
             <p>
                 Edit <code>src/App.tsx</code> and save. This page will
                 automatically reload.
             </p>
-            <div>
+            <div style={{ backgroundColor: "red" }}>
                 <Container>
                     <Row>
                         <Col>
                             <div>
                                 <img
-                                    src="C:\Users\micking\tasks\public\IMG_1715.jpg"
+                                    src="C:Users\micking\tasks\public\IMG_1715.jpg"
                                     alt="A picture of abandoned food my friend took"
                                 />
                             </div>
-                            <div
-                                style={{
-                                    backgroundColor: "red",
-                                    width: "1",
-                                    height: "1"
-                                }}
-                            ></div>
                         </Col>
                         <Col>
                             <div>
