@@ -75,47 +75,55 @@ FAIL src/HtmlCss.test.tsx
             [36m</code>[39m
             [0m and save. This page will automatically reload. Hello World[0m
           [36m</p>[39m
-          [36m<div[39m
-            [33mclass[39m=[32m"container"[39m
-          [36m>[39m
+          [36m<div>[39m
             [36m<div[39m
-              [33mclass[39m=[32m"row"[39m
+              [33mclass[39m=[32m"container"[39m
             [36m>[39m
               [36m<div[39m
-                [33mclass[39m=[32m"col"[39m
+                [33mclass[39m=[32m"row"[39m
               [36m>[39m
-                [36m<img[39m
-                  [33malt[39m=[32m"A picture of abandoned food my friend took"[39m
-                  [33msrc[39m=[32m"C:\\Users\\micking\\tasks\\public\\IMG_1715.jpg"[39m
-                [36m/>[39m
                 [36m<div[39m
-                  [33mstyle[39m=[32m"background-color: red;"[39m
-                [36m/>[39m
-              [36m</div>[39m
-              [36m<div[39m
-                [33mclass[39m=[32m"col"[39m
-              [36m>[39m
-                [36m<button[39m
-                  [33mclass[39m=[32m"btn btn-primary"[39m
-                  [33mtype[39m=[32m"button"[39m
+                  [33mclass[39m=[32m"col"[39m
                 [36m>[39m
-                  [0mLog Hello World[0m
-                [36m</button>[39m
-                [0mOrdered List:[0m
-                [36m<ol>[39m
-                  [36m<li>[39m
-                    [0mFirst[0m
-                  [36m</li>[39m
-                  [36m<li>[39m
-                    [0mNext[0m
-                  [36m</li>[39m
-                  [36m<li>[39m
-                    [0mLast[0m
-                  [36m</li>[39m
-                [36m</ol>[39m
+                  [36m<div>[39m
+                    [36m<img[39m
+                      [33malt[39m=[32m"A picture of abandoned food my friend took"[39m
+                      [33msrc[39m=[32m"C:\\Users\\micking\\tasks\\public\\IMG_1715.jpg"[39m
+                    [36m/>[39m
+                  [36m</div>[39m
+                  [36m<div[39m
+                    [33mstyle[39m=[32m"background-color: red;"[39m
+                  [36m/>[39m
+                [36m</div>[39m
                 [36m<div[39m
-                  [33mstyle[39m=[32m"background-color: red;"[39m
-                [36m/>[39m
+                  [33mclass[39m=[32m"col"[39m
+                [36m>[39m
+                  [36m<div>[39m
+                    [36m<button[39m
+                      [33mclass[39m=[32m"btn btn-primary"[39m
+                      [33mtype[39m=[32m"button"[39m
+                    [36m>[39m
+                      [0mLog Hello World[0m
+                    [36m</button>[39m
+                  [36m</div>[39m
+                  [36m<div>[39m
+                    [0mOrdered List:[0m
+                    [36m<ol>[39m
+                      [36m<li>[39m
+                        [0mFirst[0m
+                      [36m</li>[39m
+                      [36m<li>[39m
+                        [0mNext[0m
+                      [36m</li>[39m
+                      [36m<li>[39m
+                        [0mLast[0m
+                      [36m</li>[39m
+                    [36m</ol>[39m
+                  [36m</div>[39m
+                  [36m<div[39m
+                    [33mstyle[39m=[32m"background-color: red;"[39m
+                  [36m/>[39m
+                [36m</div>[39m
               [36m</div>[39m
             [36m</div>[39m
           [36m</div>[39m
@@ -149,5 +157,5 @@ All files |     100 |      100 |     100 |     100 |
 Test Suites: 1 failed, 2 passed, 3 total
 Tests:       1 failed, 8 passed, 9 total
 Snapshots:   0 total
-Time:        3.043 s
+Time:        3.077 s
 Ran all test suites.
