@@ -3,9 +3,15 @@
  * JUST the first and last number. If there are no elements, return
  * an empty array. If there is one element, the resulting list should
  * the number twice.
+ * DONE
  */
 export function bookEndList(numbers: number[]): number[] {
-    return numbers;
+    const firstAndLast = [];
+    if (numbers.length === 0) {
+        return [];
+    }
+    firstAndLast.push(numbers[0], numbers[numbers.length - 1]);
+    return firstAndLast;
 }
 
 /**
@@ -47,8 +53,18 @@ export function stringsToIntegers(numbers: string[]): number[] {
  * convert it to 0 instead.
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
+//DONE
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    const digits = amounts.map((str) => {
+        const newstr = str.replace("$", "");
+        const x = Number(newstr);
+        if (isNaN(x)) {
+            return 0;
+        } else {
+            return x;
+        }
+    });
+    return digits;
 };
 
 /**
@@ -57,7 +73,14 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    const noQuestions = messages.filter((messages: string): boolean =>
+        messages.endsWith("?")
+    );
+    const shouting = noQuestions.map((noQuestions: string) =>
+        noQuestions.endsWith("!") ? noQuestions.toUpperCase() : noQuestions
+    );
+
+    return shouting;
 };
 
 /**
@@ -88,6 +111,10 @@ export function makeMath(addends: number[]): string {
     if (addends.length === 0) {
         return "0=0";
     } else {
+        const sum = addends.reduce(
+            (currentTotal: number, num: number) => currentTotal + num,
+            0
+        );
         return "";
     }
 }
