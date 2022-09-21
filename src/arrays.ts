@@ -86,9 +86,14 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
 /**
  * Consumes an array of words and returns the number of words that are LESS THAN
  * 4 letters long.
+ * DONE
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    const shortWords = words.filter(
+        (words: string): boolean => words.length < 4
+    );
+    const x = shortWords.length;
+    return x;
 }
 
 /**
