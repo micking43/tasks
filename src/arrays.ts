@@ -73,12 +73,11 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    const noQuestions = messages.filter((messages: string): boolean =>
-        messages.endsWith("?")
-    );
-    const shouting = noQuestions.map((noQuestions: string) =>
-        noQuestions.endsWith("!") ? noQuestions.toUpperCase() : noQuestions
-    );
+    const shouting = messages
+        .filter((messages: string): boolean => messages.endsWith("?"))
+        .map((messages: string) =>
+            messages.endsWith("!") ? messages.toUpperCase() : messages
+        );
 
     return shouting;
 };
@@ -102,7 +101,17 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    if (colors.length === 0) {
+        return true;
+    } else {
+        const rgb = colors.every(
+            (colors: string): boolean =>
+                colors.includes("red") ||
+                colors.includes("green") ||
+                colors.includes("blue")
+        );
+        return rgb;
+    }
 }
 
 /**
@@ -111,6 +120,7 @@ export function allRGB(colors: string[]): boolean {
  *
  * For instance, the array [1, 2, 3] would become "6=1+2+3".
  * And the array [] would become "0=0".
+ * DONE
  */
 export function makeMath(addends: number[]): string {
     if (addends.length === 0) {
@@ -120,7 +130,11 @@ export function makeMath(addends: number[]): string {
             (currentTotal: number, num: number) => currentTotal + num,
             0
         );
-        return "";
+        const addition = addends.join("+");
+        const newSum = sum.toString();
+        const equals = newSum.concat("=");
+        const equation = equals.concat(addition);
+        return equation;
     }
 }
 
@@ -134,5 +148,25 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    if (values.every((values: number): boolean => values >= 0)) {
+        const sum = values.reduce(
+            (currentTotal: number, num: number) => currentTotal + num,
+            0
+        );
+        const final = [...values, sum];
+        return final;
+    } else {
+        const firstNegative = values.findIndex(
+            (values: number): boolean => values < 0
+        );
+        const values2 = [...values];
+        const values3 = values2.slice(0, firstNegative);
+        const sumOf = values3.reduce(
+            (currentTotal: number, num: number) => currentTotal + num,
+            0
+        );
+        const valuesFinal = [...values];
+        valuesFinal.splice(firstNegative + 1, 0, sumOf);
+        return valuesFinal;
+    }
 }
