@@ -1,3 +1,5 @@
+import { notEqual } from "assert";
+
 /**
  * Consume an array of numbers, and return a new array containing
  * JUST the first and last number. If there are no elements, return
@@ -31,11 +33,6 @@ export function tripleNumbers(numbers: number[]): number[] {
  */
 export function stringsToIntegers(numbers: string[]): number[] {
     const digits = numbers.map((str) => {
-        // if (isNaN(str)) {
-        //     return 0;
-        // } else {
-        //     return Number(str);
-        // }
         const x = Number(str);
         if (isNaN(x)) {
             return 0;
@@ -71,14 +68,15 @@ export const removeDollars = (amounts: string[]): number[] => {
  * Consume an array of messages and return a new list of the messages. However, any
  * string that ends in "!" should be made uppercase. Also, remove any strings that end
  * in question marks ("?").
+ * DONE
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    const shouting = messages
-        .filter((messages: string): boolean => messages.endsWith("?"))
-        .map((messages: string) =>
-            messages.endsWith("!") ? messages.toUpperCase() : messages
-        );
-
+    const noQ = messages.filter(
+        (messages: string): boolean => !messages.endsWith("?")
+    );
+    const shouting = noQ.map((noQ: string): string =>
+        noQ.endsWith("!") ? noQ.toUpperCase() : noQ
+    );
     return shouting;
 };
 
@@ -99,6 +97,7 @@ export function countShortWords(words: string[]): number {
  * Consumes an array of colors (e.g., 'red', 'purple') and returns true if ALL
  * the colors are either 'red', 'blue', or 'green'. If an empty list is given,
  * then return true.
+ * DONE
  */
 export function allRGB(colors: string[]): boolean {
     if (colors.length === 0) {
@@ -106,9 +105,7 @@ export function allRGB(colors: string[]): boolean {
     } else {
         const rgb = colors.every(
             (colors: string): boolean =>
-                colors.includes("red") ||
-                colors.includes("green") ||
-                colors.includes("blue")
+                colors === "red" || colors === "green" || colors === "blue"
         );
         return rgb;
     }
@@ -146,6 +143,7 @@ export function makeMath(addends: number[]): string {
  *
  * For instance, the array [1, 9, -5, 7] would become [1, 9, -5, 10, 7]
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
+ * DONE
  */
 export function injectPositive(values: number[]): number[] {
     if (values.every((values: number): boolean => values >= 0)) {
