@@ -1,5 +1,6 @@
-import { typeImplementation } from "@testing-library/user-event/dist/type/typeImplementation";
-import { couldStartTrivia } from "typescript";
+//import { typeImplementation } from "@testing-library/user-event/dist/type/typeImplementation";
+//import { couldStartTrivia } from "typescript";
+//These two imports are causing github not to build. I hope this doesn't break anything
 import { Question, QuestionType } from "./interfaces/question";
 
 /**
