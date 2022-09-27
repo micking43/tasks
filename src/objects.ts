@@ -1,3 +1,6 @@
+//import { typeImplementation } from "@testing-library/user-event/dist/type/typeImplementation";
+//import { couldStartTrivia } from "typescript";
+//These two imports are causing github not to build. I hope this doesn't break anything
 import { Question, QuestionType } from "./interfaces/question";
 
 /**
@@ -10,7 +13,17 @@ export function makeBlankQuestion(
     name: string,
     type: QuestionType
 ): Question {
-    return {};
+    const newQuestion = {
+        id: id,
+        name: name,
+        type: type,
+        body: "",
+        expected: "",
+        options: [],
+        points: 1,
+        published: false
+    };
+    return newQuestion;
 }
 
 /**
@@ -19,9 +32,17 @@ export function makeBlankQuestion(
  * the `expected`, ignoring capitalization and trimming any whitespace.
  *
  * HINT: Look up the `trim` and `toLowerCase` functions.
+ * DONE
  */
 export function isCorrect(question: Question, answer: string): boolean {
-    return false;
+    const trimmedAnswer = answer.trim();
+    const finalAnswer = trimmedAnswer.toLowerCase();
+    const lowerExpected = question.expected.toLowerCase();
+    if (finalAnswer === lowerExpected) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**
@@ -29,8 +50,20 @@ export function isCorrect(question: Question, answer: string): boolean {
  * the `answer` is valid (but not necessarily correct). For a `short_answer_question`,
  * any answer is valid. But for a `multiple_choice_question`, the `answer` must
  * be exactly one of the options.
+ * DONE
  */
 export function isValid(question: Question, answer: string): boolean {
+    const final = question.options.some(
+        (options: string): boolean => options === answer
+    );
+    if (question.type === "short_answer_question") {
+        return true;
+    }
+    if (question.type === "multiple_choice_question") {
+        if (final) {
+            return true;
+        }
+    }
     return false;
 }
 
@@ -39,9 +72,14 @@ export function isValid(question: Question, answer: string): boolean {
  * `id` and first 10 characters of the `name`. The two strings should be
  * separated by ": ". So for example, the question with id 9 and the
  * name "My First Question" would become "9: My First Q".
+ * DONE
  */
 export function toShortForm(question: Question): string {
-    return "";
+    const stringId = question.id.toString();
+    const firstHalf = stringId.concat(": ");
+    const firstTen = question.name.slice(0, 10);
+    const stringFinal = firstHalf.concat(firstTen);
+    return stringFinal;
 }
 
 /**
@@ -62,24 +100,49 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
-    return "";
+    const optionsString = question.options.map(
+        (options: string): string => "\n" + "- " + options
+    );
+    const optionsString2 = optionsString.join();
+    const optionsString3 = optionsString2.replace(/,/g, "");
+    const firstString = "# ";
+    const nameString = firstString.concat(question.name);
+    const bodyString = question.body;
+    if (question.type === "multiple_choice_question") {
+        const multiString = nameString.concat(
+            "\n" + bodyString + optionsString3
+        );
+        return multiString;
+    } else {
+        const singleString = nameString.concat("\n" + bodyString);
+        return singleString;
+    }
 }
 
 /**
  * Return a new version of the given question, except the name should now be
  * `newName`.
+ * DONE
  */
 export function renameQuestion(question: Question, newName: string): Question {
-    return question;
+    const newQuestion = { ...question, name: newName };
+    return newQuestion;
 }
 
 /**
  * Return a new version of the given question, except the `published` field
  * should be inverted. If the question was not published, now it should be
  * published; if it was published, now it should be not published.
+ * DONE
  */
 export function publishQuestion(question: Question): Question {
-    return question;
+    const notPublished = { ...question, published: false };
+    const isPublished = { ...question, published: true };
+    if (question.published === true) {
+        return notPublished;
+    } else {
+        return isPublished;
+    }
 }
 
 /**
@@ -89,7 +152,15 @@ export function publishQuestion(question: Question): Question {
  * The `published` field should be reset to false.
  */
 export function duplicateQuestion(id: number, oldQuestion: Question): Question {
-    return oldQuestion;
+    const partname = "Copy of ";
+    const newname = partname.concat(oldQuestion.name);
+    const newQuestion = {
+        ...oldQuestion,
+        id: id,
+        name: newname,
+        published: false
+    };
+    return newQuestion;
 }
 
 /**
@@ -100,7 +171,11 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
  * Check out the subsection about "Nested Fields" for more information.
  */
 export function addOption(question: Question, newOption: string): Question {
-    return question;
+    const newQuestion = {
+        ...question,
+        options: [...question.options, newOption]
+    };
+    return newQuestion;
 }
 
 /**
@@ -117,5 +192,12 @@ export function mergeQuestion(
     contentQuestion: Question,
     { points }: { points: number }
 ): Question {
-    return contentQuestion;
+    const newQuestion = {
+        ...contentQuestion,
+        id: id,
+        name: name,
+        published: false,
+        points: points
+    };
+    return newQuestion;
 }
