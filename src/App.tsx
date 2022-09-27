@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "./App.css";
 import { Button } from "react-bootstrap";
+import logo from "./IMG_1715.jpg";
 
 function App(): JSX.Element {
     return (
@@ -20,7 +21,7 @@ function App(): JSX.Element {
                         <Col>
                             <div>
                                 <img
-                                    src="C:Users\micking\tasks\public\IMG_1715.jpg"
+                                    src={logo}
                                     alt="A picture of abandoned food my friend took"
                                 />
                             </div>
