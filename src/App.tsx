@@ -2,13 +2,17 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "./App.css";
 import { Button } from "react-bootstrap";
-//import image from "./IMG_1715.jpg";
+import food from "./Images/food.png";
 
 function App(): JSX.Element {
     return (
         <div className="App">
             <header className="App-header">
                 Michael King UD CISC275 with React Hooks and TypeScript
+                <img
+                    src={food}
+                    alt="A picture of abandoned food my friend took"
+                />
             </header>
             <h1>Another Header</h1>
             <p>
@@ -19,14 +23,7 @@ function App(): JSX.Element {
                 <Container>
                     <Row>
                         <Col>
-                            <div>
-                                <img
-                                    src={
-                                        "C:/Users/micking/tasks/src/IMG_1715.jpg"
-                                    }
-                                    alt="A picture of abandoned food my friend took"
-                                />
-                            </div>
+                            <div></div>
                         </Col>
                         <Col>
                             <div>
