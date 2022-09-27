@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "./App.css";
 import { Button } from "react-bootstrap";
-import logo from "./Images/IMG_1715.jpg";
+import logo from "./IMG_1715.JPG";
 
 function App(): JSX.Element {
     return (
