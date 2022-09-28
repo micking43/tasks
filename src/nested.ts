@@ -4,6 +4,7 @@ import { Question, QuestionType } from "./interfaces/question";
 /**
  * Consumes an array of questions and returns a new array with only the questions
  * that are `published`.
+ * DONE
  */
 export function getPublishedQuestions(questions: Question[]): Question[] {
     const publishedQ = questions.filter(
@@ -19,50 +20,84 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
     const notEmpty = questions.filter(
-        (questions: Question): boolean => questions.body != ""
+        (questions: Question): boolean => !(questions.body === "")
     );
-    return [];
+    const hasOptions = notEmpty.filter(
+        (questions: Question): boolean => !(questions.options.length === 0)
+    );
+    return hasOptions;
 }
 
 /***
  * Consumes an array of questions and returns the question with the given `id`. If the
  * question is not found, return `null` instead.
+ * DONE
  */
 export function findQuestion(
     questions: Question[],
     id: number
 ): Question | null {
-    return null;
+    const findId = questions.find(
+        (questions: Question): boolean => questions.id === id
+    );
+    if (findId != undefined) {
+        return findId;
+    } else {
+        return null;
+    }
 }
 
 /**
  * Consumes an array of questions and returns a new array that does not contain the question
  * with the given `id`.
+ * DONE
  */
 export function removeQuestion(questions: Question[], id: number): Question[] {
-    return [];
+    const removed = questions.filter(
+        (questions: Question): boolean => !(questions.id === id)
+    );
+    return removed;
 }
 
 /***
  * Consumes an array of questions and returns a new array containing just the names of the
  * questions, as an array.
+ * DONE
  */
 export function getNames(questions: Question[]): string[] {
-    return [];
+    const names = questions.map(
+        (questions: Question): string => questions.name
+    );
+    return names;
 }
 
 /***
  * Consumes an array of questions and returns the sum total of all their points added together.
+ * DONE
  */
 export function sumPoints(questions: Question[]): number {
-    return 0;
+    const allPoints = questions.reduce(
+        (currentSum: number, questions: Question) =>
+            currentSum + questions.points,
+        0
+    );
+    return allPoints;
 }
 
 /***
  * Consumes an array of questions and returns the sum total of the PUBLISHED questions.
+ * DONE
  */
 export function sumPublishedPoints(questions: Question[]): number {
-    return 0;
+    const isPublish = questions.filter(
+        (questions: Question): boolean => questions.published
+    );
+    const publishPoints = isPublish.reduce(
+        (currentSum: number, isPublish: Question) =>
+            currentSum + isPublish.points,
+        0
+    );
+    return publishPoints;
 }
 
 /***
@@ -81,26 +116,48 @@ id,name,options,points,published
 9,Shapes,3,2,false
 ` *
  * Check the unit tests for more examples!
+DONE
  */
 export function toCSV(questions: Question[]): string {
-    return "";
+    const questionCSV = questions
+        .map(
+            (questions: Question): string =>
+                `${questions.id},${questions.name},${questions.options.length},${questions.points},${questions.published}`
+        )
+        .join("\n");
+    const header = "id,name,options,points,published\n";
+    const finalCSV = header + questionCSV;
+    return finalCSV;
 }
 
 /**
  * Consumes an array of Questions and produces a corresponding array of
  * Answers. Each Question gets its own Answer, copying over the `id` as the `questionId`,
  * making the `text` an empty string, and using false for both `submitted` and `correct`.
+ * DONE
  */
 export function makeAnswers(questions: Question[]): Answer[] {
-    return [];
+    const answer: Answer[] = questions.map(
+        (questions: Question): Answer => ({
+            questionId: questions.id,
+            text: "",
+            submitted: false,
+            correct: false
+        })
+    );
+    return answer;
 }
 
 /***
  * Consumes an array of Questions and produces a new array of questions, where
  * each question is now published, regardless of its previous published status.
+ * DONE
  */
 export function publishAll(questions: Question[]): Question[] {
-    return [];
+    const allPublish = questions.map(
+        (questions: Question): Question => ({ ...questions, published: true })
+    );
+    return allPublish;
 }
 
 /***
@@ -108,13 +165,18 @@ export function publishAll(questions: Question[]): Question[] {
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
-    return false;
+    const x: QuestionType = questions[0].type;
+    const checking = questions.every(
+        (questions: Question): boolean => questions.type === x
+    );
+    return checking;
 }
 
 /***
  * Consumes an array of Questions and produces a new array of the same Questions,
  * except that a blank question has been added onto the end. Reuse the `makeBlankQuestion`
  * you defined in the `objects.ts` file.
+ * DONE
  */
 export function addNewQuestion(
     questions: Question[],
@@ -122,7 +184,29 @@ export function addNewQuestion(
     name: string,
     type: QuestionType
 ): Question[] {
-    return [];
+    const newQuestions = [...questions];
+    const blank = makeBlankQuestion(id, name, type);
+    newQuestions.push(blank);
+    return newQuestions;
+}
+//Didn't feel like figuring out import
+//just wrote this instead
+export function makeBlankQuestion(
+    id: number,
+    name: string,
+    type: QuestionType
+): Question {
+    const newQuestion = {
+        id: id,
+        name: name,
+        type: type,
+        body: "",
+        expected: "",
+        options: [],
+        points: 1,
+        published: false
+    };
+    return newQuestion;
 }
 
 /***
@@ -135,6 +219,7 @@ export function renameQuestionById(
     targetId: number,
     newName: string
 ): Question[] {
+    const newQuestions = [...questions];
     return [];
 }
 
