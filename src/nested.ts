@@ -165,6 +165,9 @@ export function publishAll(questions: Question[]): Question[] {
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
+    if (questions.length === 0) {
+        return true;
+    }
     const x: QuestionType = questions[0].type;
     const checking = questions.every(
         (questions: Question): boolean => questions.type === x
@@ -190,7 +193,7 @@ export function addNewQuestion(
     return newQuestions;
 }
 //Didn't feel like figuring out import
-//just wrote this instead
+//just wrote it again instead
 export function makeBlankQuestion(
     id: number,
     name: string,
@@ -219,7 +222,6 @@ export function renameQuestionById(
     targetId: number,
     newName: string
 ): Question[] {
-    const newQuestions = [...questions];
     return [];
 }
 
