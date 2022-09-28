@@ -221,7 +221,12 @@ export function renameQuestionById(
     targetId: number,
     newName: string
 ): Question[] {
-    return [];
+    const newQuestion = [...questions];
+    const indexOfId = newQuestion.findIndex(
+        (questions: Question): boolean => questions.id === targetId
+    );
+    newQuestion[indexOfId].name = newName;
+    return newQuestion;
 }
 
 /***
@@ -263,6 +268,7 @@ export function editOption(
  * The only difference is that the question with id `targetId` should now be duplicated, with
  * the duplicate inserted directly after the original question. Use the `duplicateQuestion`
  * function you defined previously; the `newId` is the parameter to use for the duplicate's ID.
+ * DONE
  */
 export function duplicateQuestionInArray(
     questions: Question[],
