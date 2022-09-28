@@ -20,12 +20,10 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
     const notEmpty = questions.filter(
-        (questions: Question): boolean => !(questions.body === "")
+        (questions: Question): boolean =>
+            !(questions.body === "") && !(questions.options.length === 0)
     );
-    const hasOptions = notEmpty.filter(
-        (questions: Question): boolean => !(questions.options.length === 0)
-    );
-    return hasOptions;
+    return notEmpty;
 }
 
 /***
@@ -163,6 +161,7 @@ export function publishAll(questions: Question[]): Question[] {
 /***
  * Consumes an array of Questions and produces whether or not all the questions
  * are the same type. They can be any type, as long as they are all the SAME type.
+ * DONE
  */
 export function sameType(questions: Question[]): boolean {
     if (questions.length === 0) {
@@ -270,5 +269,23 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    return [];
+    const newQuestions = [...questions];
+    const indexOfId = newQuestions.findIndex(
+        (questions: Question): boolean => questions.id === targetId
+    );
+    const copy = duplicateQuestion(newId, questions[indexOfId]);
+    newQuestions.splice(1 + indexOfId, 0, copy);
+    return newQuestions;
+}
+
+export function duplicateQuestion(id: number, oldQuestion: Question): Question {
+    const partname = "Copy of ";
+    const newname = partname.concat(oldQuestion.name);
+    const newQuestion = {
+        ...oldQuestion,
+        id: id,
+        name: newname,
+        published: false
+    };
+    return newQuestion;
 }
