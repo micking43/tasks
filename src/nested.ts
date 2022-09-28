@@ -221,7 +221,9 @@ export function renameQuestionById(
     targetId: number,
     newName: string
 ): Question[] {
-    const newQuestion = [...questions];
+    const newQuestion = questions.map(
+        (questions: Question): Question => ({ ...questions })
+    );
     const indexOfId = newQuestion.findIndex(
         (questions: Question): boolean => questions.id === targetId
     );
@@ -241,6 +243,16 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType
 ): Question[] {
+    const changedQuestions = questions.map(
+        (questions: Question): Question => ({ ...questions })
+    );
+    const indexOfId = changedQuestions.findIndex(
+        (questions: Question): boolean => questions.id === targetId
+    );
+    if (newQuestionType != "multiple_choice_question") {
+        changedQuestions[indexOfId].options = [];
+    }
+    changedQuestions[indexOfId].type = newQuestionType;
     return [];
 }
 
@@ -268,7 +280,7 @@ export function editOption(
  * The only difference is that the question with id `targetId` should now be duplicated, with
  * the duplicate inserted directly after the original question. Use the `duplicateQuestion`
  * function you defined previously; the `newId` is the parameter to use for the duplicate's ID.
- * DONE
+ *
  */
 export function duplicateQuestionInArray(
     questions: Question[],
@@ -276,7 +288,7 @@ export function duplicateQuestionInArray(
     newId: number
 ): Question[] {
     const newQuestions = [...questions];
-    const indexOfId = newQuestions.findIndex(
+    const indexOfId = questions.findIndex(
         (questions: Question): boolean => questions.id === targetId
     );
     const copy = duplicateQuestion(newId, questions[indexOfId]);
