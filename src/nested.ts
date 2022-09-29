@@ -1,3 +1,4 @@
+import { isEmptyStatement } from "typescript";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
 
@@ -8,7 +9,7 @@ import { Question, QuestionType } from "./interfaces/question";
  */
 export function getPublishedQuestions(questions: Question[]): Question[] {
     const publishedQ = questions.filter(
-        (questions: Question): boolean => questions.published
+        (questions: Question): boolean => questions.published === true
     );
     return publishedQ;
 }
@@ -21,7 +22,7 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
     const notEmpty = questions.filter(
         (questions: Question): boolean =>
-            !(questions.body === "") && !(questions.options.length === 0)
+            !(questions.body === "") || !(questions.options.length === 0)
     );
     return notEmpty;
 }
@@ -215,6 +216,7 @@ export function makeBlankQuestion(
  * Consumes an array of Questions and produces a new array of Questions, where all
  * the Questions are the same EXCEPT for the one with the given `targetId`. That
  * Question should be the same EXCEPT that its name should now be `newName`.
+ * DONE
  */
 export function renameQuestionById(
     questions: Question[],
@@ -237,6 +239,7 @@ export function renameQuestionById(
  * Question should be the same EXCEPT that its `type` should now be the `newQuestionType`
  * AND if the `newQuestionType` is no longer "multiple_choice_question" than the `options`
  * must be set to an empty list.
+ * DONE
  */
 export function changeQuestionTypeById(
     questions: Question[],
@@ -253,7 +256,7 @@ export function changeQuestionTypeById(
         changedQuestions[indexOfId].options = [];
     }
     changedQuestions[indexOfId].type = newQuestionType;
-    return [];
+    return changedQuestions;
 }
 
 /**
@@ -265,6 +268,7 @@ export function changeQuestionTypeById(
  *
  * Remember, if a function starts getting too complicated, think about how a helper function
  * can make it simpler! Break down complicated tasks into little pieces.
+ * DONE
  */
 export function editOption(
     questions: Question[],
@@ -272,6 +276,19 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
+    const edited = deepCloneQuestions(questions);
+    const indexOfId = edited.findIndex(
+        (edited: Question): boolean => edited.id === targetId
+    );
+    if (targetOptionIndex === -1) {
+        const negative = deepCloneQuestions(edited);
+        negative[indexOfId].options.push(newOption);
+        return negative;
+    } else {
+        const positive = deepCloneQuestions(edited);
+        positive[indexOfId].options.splice(targetOptionIndex, 1, newOption);
+        return positive;
+    }
     return [];
 }
 
@@ -280,7 +297,7 @@ export function editOption(
  * The only difference is that the question with id `targetId` should now be duplicated, with
  * the duplicate inserted directly after the original question. Use the `duplicateQuestion`
  * function you defined previously; the `newId` is the parameter to use for the duplicate's ID.
- *
+ *DONE
  */
 export function duplicateQuestionInArray(
     questions: Question[],
@@ -306,4 +323,20 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
         published: false
     };
     return newQuestion;
+}
+
+export function deepCloneQuestions(questions: Question[]): Question[] {
+    return questions.map(
+        (questions: Question): Question => ({
+            ...questions,
+            id: questions.id,
+            name: questions.name,
+            body: questions.body,
+            type: questions.type,
+            options: [...questions.options],
+            expected: questions.expected,
+            points: questions.points,
+            published: questions.published
+        })
+    );
 }
