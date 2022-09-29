@@ -1,4 +1,4 @@
-import { isEmptyStatement } from "typescript";
+//import { isEmptyStatement } from "typescript";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
 
@@ -22,7 +22,11 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
     const notEmpty = questions.filter(
         (questions: Question): boolean =>
-            !(questions.body === "") || !(questions.options.length === 0)
+            !(
+                questions.body === "" &&
+                questions.expected === "" &&
+                questions.options.length === 0
+            )
     );
     return notEmpty;
 }
