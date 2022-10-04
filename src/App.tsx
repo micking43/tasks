@@ -15,10 +15,10 @@ function App(): JSX.Element {
         <div className="App">
             <header className="App-header">
                 Michael King UD CISC275 with React Hooks and TypeScript
-                <img
+                {/* <img
                     src={food}
                     alt="A picture of abandoned food my friend took"
-                />
+                /> */}
             </header>
             <hr></hr>
             <Counter></Counter>
