@@ -17,10 +17,10 @@ export function TwoDice(): JSX.Element {
     const [rightDie, setRightDie] = useState<number>(6);
     return (
         <div>
-            <div>
+            <div data-testid="left-die">
                 left-die: <span>{leftDie}</span>
             </div>
-            <div>
+            <div data-testid="right-die">
                 right-die: <span>{rightDie}</span>
             </div>
             <div>
