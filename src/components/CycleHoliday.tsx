@@ -38,29 +38,31 @@ export function CycleHoliday(): JSX.Element {
                 : "Valentines Day"
         );
     }
+    function emojis(): string {
+        if (holiday === "Halloween") {
+            return "🎃";
+        } else if (holiday === "Christmas") {
+            return "🎁";
+        } else if (holiday === "Hanukkah") {
+            return "🕎";
+        } else if (holiday === "Thanksgiving") {
+            return "🦃";
+        } else if (holiday === "Valentines Day") {
+            return "❤️";
+        } else {
+            return "🎃";
+        }
+    }
     return (
         <div>
+            <div>
+                Holiday: {emojis()} {holiday}
+            </div>
             <div>
                 <Button onClick={alphabet}>Advance By Alphabet</Button>
             </div>
             <div>
-                <Button onClick={year}>Advance by Date</Button>
-            </div>
-            <div>
-                Holiday:{" "}
-                {holiday === "Halloween" ? (
-                    <span>🎃</span>
-                ) : holiday === "Christmas" ? (
-                    <span>🎁</span>
-                ) : holiday === "Hanukkah" ? (
-                    <span>🕎</span>
-                ) : holiday === "Thanksgiving" ? (
-                    <span>🦃</span>
-                ) : holiday === "Valentines Day" ? (
-                    <span>❤️</span>
-                ) : (
-                    <span> </span>
-                )}
+                <Button onClick={year}>Advance by Year</Button>
             </div>
         </div>
     );

@@ -15,7 +15,7 @@ export function ChangeType(): JSX.Element {
     return (
         <div>
             <div>
-                <Button onClick={changeQuestionType}>ChangeType</Button>
+                <Button onClick={changeQuestionType}>Change Type</Button>
             </div>
             <div>
                 {type === "short_answer_question" ? (
