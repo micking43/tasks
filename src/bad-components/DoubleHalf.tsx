@@ -9,7 +9,7 @@ function Doubler({ setValue }: settingValue): JSX.Element {
     return <Button onClick={() => setValue(2)}>Double</Button>;
 }
 function Halver({ setValue }: settingValue): JSX.Element {
-    return <Button onClick={() => setValue(0.5)}>Half</Button>;
+    return <Button onClick={() => setValue(0.5)}>Halve</Button>;
 }
 
 export function DoubleHalf(): JSX.Element {
