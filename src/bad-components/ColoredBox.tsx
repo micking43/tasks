@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
-export const COLORS = ["red", "blue", "green"];
-const DEFAULT_COLOR_INDEX = 0;
+interface settingColors {
+    setColor: (color: number) => void;
+    color: number;
+}
 
-function ChangeColor(): JSX.Element {
-    const [colorIndex, setColorIndex] = useState<number>(DEFAULT_COLOR_INDEX);
+export const COLORS = ["red", "blue", "green"];
+//const DEFAULT_COLOR_INDEX = 0;
+
+function ChangeColor({ setColor }: settingColors): JSX.Element {
+    //const [colorIndex, setColorIndex] = useState<number>(DEFAULT_COLOR_INDEX);
     return (
-        <Button onClick={() => setColorIndex((1 + colorIndex) % COLORS.length)}>
-            Next Color
-        </Button>
+        <Button onClick={() => setColor(1 % COLORS.length)}>Next Color</Button>
     );
 }
 
-function ColorPreview(): JSX.Element {
+function ColorPreview({ color }: settingColors): JSX.Element {
     return (
         <div
             data-testid="colored-box"
             style={{
                 width: "50px",
                 height: "50px",
-                backgroundColor: COLORS[DEFAULT_COLOR_INDEX],
+                backgroundColor: COLORS[color % COLORS.length],
                 display: "inline-block",
                 verticalAlign: "bottom",
                 marginLeft: "5px"
@@ -30,13 +33,18 @@ function ColorPreview(): JSX.Element {
 }
 
 export function ColoredBox(): JSX.Element {
+    const [colors, setColors] = useState<number>(0);
+    const finalColor = () => setColors(colors + 1);
     return (
         <div>
             <h3>Colored Box</h3>
-            <span>The current color is: {COLORS[DEFAULT_COLOR_INDEX]}</span>
+            <span>The current color is: {COLORS[colors % COLORS.length]}</span>
             <div>
-                <ChangeColor></ChangeColor>
-                <ColorPreview></ColorPreview>
+                <ChangeColor setColor={finalColor} color={colors}></ChangeColor>
+                <ColorPreview
+                    setColor={finalColor}
+                    color={colors}
+                ></ColorPreview>
             </div>
         </div>
     );
