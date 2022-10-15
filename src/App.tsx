@@ -2,7 +2,7 @@ import React from "react";
 //import { Col, Container, Row } from "react-bootstrap";
 import "./App.css";
 //import { Button } from "react-bootstrap";
-import food from "./Images/food.png";
+//import food from "./Images/food.png";
 import { ChangeType } from "./components/ChangeType";
 import { RevealAnswer } from "./components/RevealAnswer";
 import { StartAttempt } from "./components/StartAttempt";
@@ -24,7 +24,6 @@ function App(): JSX.Element {
         <div className="App">
             <header className="App-header">
                 Michael King UD CISC275 with React Hooks and TypeScript
-                <img src={food} alt="Picture of food my friend took" />
             </header>
             <hr></hr>
             <DoubleHalf></DoubleHalf>
